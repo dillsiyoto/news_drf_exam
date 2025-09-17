@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 from dirtyfields import DirtyFieldsMixin
 
 class Client(DirtyFieldsMixin, AbstractUser):
-    username = None
     email = models.EmailField(
         verbose_name="эл. почта", 
         max_length=30,
@@ -22,7 +21,7 @@ class Client(DirtyFieldsMixin, AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["username"] 
 
     class Meta:
         ordering = ("id",)

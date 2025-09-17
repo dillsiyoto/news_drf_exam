@@ -71,6 +71,18 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False,         
+    "JSON_EDITOR": True,
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "JWT Authorization header. Example: \"Bearer <access_token>\"",
+        }
+    },
+}
 
 DATABASES = {
     "default": {
@@ -121,3 +133,5 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.Client"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" 
+DEFAULT_FROM_EMAIL = "noreply@example.com"
