@@ -21,12 +21,29 @@ class RegistrationViewSet(mixins.CreateModelMixin, GenericViewSet):
     permission_classes = [AllowAny]
     queryset = Client.objects.all()
     serializer_class = UserRegistrationSerializer
+    
+    @swagger_auto_schema(
+        request_body=UserRegistrationSerializer,
+        responses={
+            201: "пользователь зарегистрирован",
+            400: "ошибка валидации данных"
+        }
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
 
 class ActivateAccount(APIView):
     permission_classes = [AllowAny]
 
-    @swagger_auto_schema(request_body=ActivateSerializer)
+    @swagger_auto_schema(
+        request_body=ActivateSerializer,
+        responses={
+            200: "аккаунт активирован",
+            400: "ошибка валидации данных",
+            404: "пользователь не найден"
+        }
+    )
     def post(self, request):
         serializer = ActivateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -46,6 +63,13 @@ class ActivateAccount(APIView):
     
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    @swagger_auto_schema(request_body=LoginSerializer)
+    @swagger_auto_schema(
+        request_body=LoginSerializer,
+        responses={
+            200: "JWT токены получены",
+            401: "неверный email или пароль",
+            400: "ошибка валидации данных"
+        }
+    )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)

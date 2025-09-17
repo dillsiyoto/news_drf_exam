@@ -4,18 +4,18 @@ from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
 BASE_DIR = Path(__file__).resolve().parent.parent
-KEYS_PATH = os.path.join(BASE_DIR, "keys")
 SECRET_KEY = config("SECRET_KEY")
+NEWSAPI_KEY = config("NEWSAPI_KEY")
 
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    "news.apps.NewsConfig",
     "users.apps.UsersConfig",
     "drf_yasg",
     "rest_framework",

@@ -35,4 +35,5 @@ urlpatterns = [
             name="schema-swagger-ui",
         ),
      path("api/users/", include("users.urls")),
+     path("api/news/", include("news.urls")),
 ]
