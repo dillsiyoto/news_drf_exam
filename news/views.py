@@ -56,12 +56,12 @@ class UpdateArticles(APIView):
             if created:
                 new_articles.append(article_obj)
 
-        cache.set("news_update", [article_obj.title for article_obj in new_articles], 
-                  timeout=60 * 30)
-
+        serializer = ArticleSerializer(new_articles, many=True)
+        cache.set("news_update", serializer.data, timeout=60 * 30)
+        
         return Response({
             "message": "новости обновлены",
-            "new_articles": [article_obj.title for article_obj in new_articles],
+            "new_articles": serializer.data,
         })
     
 
