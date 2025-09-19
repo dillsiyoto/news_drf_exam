@@ -18,7 +18,3 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 class ActivateSerializer(serializers.Serializer):
     code = serializers.UUIDField()
-
-class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
