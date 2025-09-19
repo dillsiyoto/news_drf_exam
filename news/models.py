@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Article(models.Model):
     source_id = models.CharField(
         max_length=50,

@@ -1,5 +1,3 @@
-import uuid
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from dirtyfields import DirtyFieldsMixin
@@ -16,12 +14,12 @@ class Client(DirtyFieldsMixin, AbstractUser):
     )
     activation_code = models.UUIDField(
         verbose_name="код активации", 
-        unique=True, 
-        default=uuid.uuid4
+        null=True,
+        blank=True 
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"] 
+    REQUIRED_FIELDS = ["username"] # ?
 
     class Meta:
         ordering = ("id",)

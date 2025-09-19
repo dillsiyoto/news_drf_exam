@@ -1,11 +1,9 @@
 from rest_framework import serializers
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import Client
+from users.models import Client
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(required=True)
     password = serializers.CharField(write_only=True, min_length=6)
 
     class Meta:
@@ -19,13 +17,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class ActivateSerializer(serializers.Serializer):
-    email = serializers.EmailField()
     code = serializers.UUIDField()
-
-
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    username_field = "email"
-
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
